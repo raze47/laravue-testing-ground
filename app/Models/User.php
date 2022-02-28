@@ -9,11 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 {
     use Notifiable,
-        HasFactory;
+        HasFactory, softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +28,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         'password',
     ];
 
+   
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -112,5 +115,13 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function Posts(){
+        return $this->hasMany('App\Models\Posts');
+    }
+
+    public function PostsComments(){
+        return $this->hasMany('App\Models\PostsComments');
     }
 }

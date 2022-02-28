@@ -11,6 +11,14 @@ use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+
+//
+use App\Http\Controllers\PostsController;
+
+//Imageboards
+use App\Http\Controllers\imageboards\ImageboardController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,7 +37,22 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::patch('settings/profile', [ProfileController::class, 'update']);
     Route::patch('settings/password', [PasswordController::class, 'update']);
+
+    Route::group([ 'prefix' => 'user_post_comment'],function(){
+        //company routes
+        Route::prefix('post')->group(function(){
+            //create
+            Route::post('create', [PostsController::class, 'create_post']);
+            //List
+            Route::post('list', [PostsController::class, 'list_posts']);
+            //Delete
+            Route::post('delete', [PostsController::class, 'delete_post']);
+
+        
+        });
+    });
 });
+
 
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('login', [LoginController::class, 'login']);
@@ -43,4 +66,11 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', [OAuthController::class, 'redirect']);
     Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
+
+    //Imageboards
+    Route::group([ 'prefix' => 'imageboard'],function(){
+        Route::post('create', [ImageboardController::class, 'create']);
+    });
+
+
 });

@@ -11,17 +11,29 @@ export default [
   { path: '/password/reset/:token', name: 'password.reset', component: page('auth/password/reset.vue') },
   { path: '/email/verify/:id', name: 'verification.verify', component: page('auth/verification/verify.vue') },
   { path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue') },
-
+  
+  //{ path: '/profile', name: 'home.profile', component: page('HomeProfile.vue') },
+  { path: '/profile', name: 'home.profile', component: page('postings/postProfile.vue') },
   { path: '/home', name: 'home', component: page('home.vue') },
   {
     path: '/settings',
     component: page('settings/index.vue'),
     children: [
       { path: '', redirect: { name: 'settings.profile' } },
+      
       { path: 'profile', name: 'settings.profile', component: page('settings/profile.vue') },
       { path: 'password', name: 'settings.password', component: page('settings/password.vue') }
     ]
   },
+
+  //Vue-timer
+  { path: '/timer', name: 'timer', component: page('vue-timer/HomeTimer.vue') },
+  { path: '/timer/clock-in', name: 'clock-in', component: page('vue-timer/clock-in/ClockIn.vue') },
+
+
+  //Imageboard
+  { path:"/imageboard/catalog", name: "catalog", component: page("imageboard/catalog.vue")},
+  
 
   { path: '*', component: page('errors/404.vue') }
 ]
