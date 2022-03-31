@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('settings/password', [PasswordController::class, 'update']);
 
     Route::group([ 'prefix' => 'user_post_comment'],function(){
-        //company routes
+        //Imageboard Routes
         Route::prefix('post')->group(function(){
             //create
             Route::post('create', [PostsController::class, 'create_post']);

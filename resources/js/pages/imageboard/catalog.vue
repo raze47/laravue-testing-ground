@@ -1,29 +1,24 @@
-<template>  
-
+<template>
     <v-app>
-    <createThread v-if="createThread" />
+        <createThread v-if="createThread" v-on:createThreadDialog="createThreadDialog" />
 
-    <div align="center"
-    justify="space-around">
-        <v-btn
-
-        color="primary"
-        dark
-        @click="createThreadTrigger()"
-
-        max-width="200"
-        >
-        Create Thread
-        </v-btn>
-    </div>
+        <v-row>
+            <v-col lg="4"></v-col>
+            <v-col lg="4" class="d-flex justify-center py-12">
+                <v-btn color="primary" dark @click="createThreadDialog()" max-width="200">
+                    Create Thread
+                </v-btn>
+            </v-col>
+            <v-col lg="4"></v-col>
+        </v-row>
     </v-app>
 </template>
 <script>
-import createThread from './createThread.vue'
+    import createThread from "./createThread.vue";
 
     export default {
-        components:{
-            createThread
+        components: {
+            createThread,
         },
 
         data: () => ({
@@ -32,13 +27,9 @@ import createThread from './createThread.vue'
         }),
 
         methods: {
-            createThreadTrigger(){
-                
-                this.createThread = !this.createThread
-                console.log("createThreadTrigger")
-                console.log(this.createThread)
-            }
-        }
-        
+            createThreadDialog() {
+                this.createThread = !this.createThread;
+            },
+        },
     };
 </script>
