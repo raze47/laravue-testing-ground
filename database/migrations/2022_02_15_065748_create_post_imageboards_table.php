@@ -15,10 +15,8 @@ class CreatePostImageboardsTable extends Migration
     {
         Schema::create('post_imageboards', function (Blueprint $table) {
             $table->id();
-            $table->integer('post_id')->unsigned();
             $table->String('post');
-            $table->string('file_path');
-            $table->integer('reply_id')->unsigned();
+            $table->string('thread_file');
             $table->timestamps();
         });
     }

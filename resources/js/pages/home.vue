@@ -12,7 +12,6 @@
 </template>
 
 <script>
-    import Post from './Post'
 
     // import axios from 'axios'
     export default {
@@ -43,9 +42,6 @@
             },
         },
 
-        components: {
-            Post,
-        }
     };
 </script>
 <style>

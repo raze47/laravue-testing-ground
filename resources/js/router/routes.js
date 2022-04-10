@@ -13,7 +13,6 @@ export default [
   { path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue') },
   
   //{ path: '/profile', name: 'home.profile', component: page('HomeProfile.vue') },
-  { path: '/profile', name: 'home.profile', component: page('postings/postProfile.vue') },
   { path: '/home', name: 'home', component: page('home.vue') },
   {
     path: '/settings',
@@ -26,13 +25,9 @@ export default [
     ]
   },
 
-  //Vue-timer
-  { path: '/timer', name: 'timer', component: page('vue-timer/HomeTimer.vue') },
-  { path: '/timer/clock-in', name: 'clock-in', component: page('vue-timer/clock-in/ClockIn.vue') },
-
 
   //Imageboard
-  { path:"/imageboard/catalog", name: "catalog", component: page("imageboard/catalog.vue")},
+  { path:"/imageboard/catalog", name: "home.imageboard.catalog", component: page("imageboard/catalog.vue")},
   
 
   { path: '*', component: page('errors/404.vue') }

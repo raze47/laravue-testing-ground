@@ -11,9 +11,7 @@ class PostImageboard extends Model
 
     protected $fillable = [
         'post',
-        'post_id',
-        'reply_id',
-        'file_path',
+        'thread_file',
     ];
 
     public function replyImageboard(){

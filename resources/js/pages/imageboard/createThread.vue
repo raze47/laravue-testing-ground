@@ -34,8 +34,10 @@
 
 <script>
     import axios from "axios";
-
+    
     export default {
+        middleware: "auth",
+        
         data() {
             return{
                 dialog: false,
@@ -67,27 +69,20 @@
             },
 
             async createThreadPost() {
-                console.log(this.form.data.thread_file);
-
-
                 const formData = new FormData();
                 formData.append("thread_file", this.form.data.thread_file);
                 formData.append("post", this.form.data.post);
-                console.log(formData.get("thread_file"));
-                // let formData = new FormData();
-                //formData.append("Thread File", this.form.data.thread_file, this.form.data.thread_file.name);
-                //console.log(formData);
-                // formData.append("Post Text", this.form.data.post);
+
                 await axios
                     .post("/api/imageboard/create", formData, {
                         headers:{
                             'Content-Type': 'multipart/form-data'
                         }
                     })
-                    .then((res) => {
+                    .then(res => {
                         console.log(res);
                     })
-                    .catch((err) => {
+                    .catch(err => {
                         console.log(err);
                     });
             },

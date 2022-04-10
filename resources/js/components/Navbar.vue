@@ -27,9 +27,11 @@
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
-              <router-link :to="{ name: 'home.profile' }" class="dropdown-item ps-3">
-               <v-icon>mdi-account</v-icon>
-                {{ $t('profile') }}
+
+
+              <router-link :to="{ name: 'home.imageboard.catalog' }" class="dropdown-item ps-3">
+               <v-icon>mdi-image-text</v-icon>
+                {{ $t('imageboard') }}
               </router-link>
 
               <router-link :to="{ name: 'settings.profile' }" class="dropdown-item ps-3">
