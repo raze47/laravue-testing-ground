@@ -15,9 +15,13 @@ class CreatePostImageboardsTable extends Migration
     {
         Schema::create('post_imageboards', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->String('title');
             $table->String('post');
             $table->string('thread_file');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

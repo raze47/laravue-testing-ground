@@ -9,6 +9,9 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
+                                <v-text-field label="Title" required v-model="form.data.title"></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
                                 <v-textarea label="Post" required v-model="form.data.post"></v-textarea>
                             </v-col>
                             <v-col cols="12">
@@ -23,7 +26,7 @@
                     <v-btn color="blue darken-1" text @click="createThread = false">
                         Close
                     </v-btn>
-                    <v-btn color="blue darken-1" text type="submit" >
+                    <v-btn color="blue darken-1" text type="submit">
                         Save
                     </v-btn>
                 </v-card-actions>
@@ -44,6 +47,7 @@
                 createThread: true,
                 form: {
                     data: {
+                        title: null,
                         post: null,
                         thread_file: null,
                     },
@@ -51,16 +55,6 @@
                 },
             }
         },
-        watch: {
-            createThread(v) {
-                if (v == false) {
-                    this.$refs.createThreadForm.reset();
-                    this.createThread = false;
-                    this.$emit("createThreadDialog");
-                }
-            },
-        },
-
         methods: {
 
             async uploadFile(event){
@@ -69,22 +63,29 @@
             },
 
             async createThreadPost() {
-                const formData = new FormData();
-                formData.append("thread_file", this.form.data.thread_file);
-                formData.append("post", this.form.data.post);
-
-                await axios
-                    .post("/api/imageboard/create", formData, {
-                        headers:{
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then(res => {
-                        console.log(res);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
+                if(this.$refs.createThreadForm.validate()){
+                    const formData = new FormData();
+                    this.createThread = false;
+                    formData.append("title", this.form.data.title);
+                    formData.append("thread_file", this.form.data.thread_file);
+                    formData.append("post", this.form.data.post);
+                    
+                    await axios
+                        .post("/api/imageboard/create", formData, {
+                            headers:{
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then(res => {
+                            console.log(res);
+                            this.$refs.createThreadForm.reset();
+                            this.$emit("toggleThreadDialog");
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                }
+                
             },
         },
     };
